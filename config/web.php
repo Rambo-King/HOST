@@ -22,6 +22,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'King',
+            //'enableCsrfValidation' => false,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -29,6 +30,14 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+        ],
+        'admin' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\modules\admin\models\Manager',
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_managerIdentity', 'httpOnly' => true],
+            'idParam' => '_managerId',
+            'loginUrl' => ['admin/manager/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -48,6 +57,13 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'dateFormat' => 'php:d-M-Y',
+            'datetimeFormat' => 'php:d-M-Y H:i:s',
+            'timeFormat' => 'php:H:i:s',
+            'nullDisplay' => '',
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],

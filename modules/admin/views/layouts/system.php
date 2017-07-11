@@ -12,12 +12,15 @@
 use yii\helpers\Html;
 use app\modules\admin\assets\SystemAsset;
 SystemAsset::register($this);
+
+$controller = Yii::$app->controller->id;
+$action = Yii::$app->controller->action->id;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
     <head>
-        <title>我连之家数据管理后台</title>
+        <title>HOST数据管理后台</title>
         <meta charset="<?= Yii::$app->charset ?>">
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <?= Html::csrfMetaTags() ?>
@@ -30,7 +33,7 @@ SystemAsset::register($this);
     <body class="skin-blue">
     <?php $this->beginBody() ?>
     <header class="header">
-        <a href="index.html" class="logo">我连之家数据管理后台</a>
+        <a href="index.html" class="logo">HOST数据管理后台</a>
         <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
@@ -38,6 +41,7 @@ SystemAsset::register($this);
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
+        <a class="logo navbar-right" target="_blank" href="/">系统前台</a>
         <div class="navbar-right">
         <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
@@ -51,22 +55,9 @@ SystemAsset::register($this);
                     <img src="/system/image/avatar3.png" class="img-circle" alt="User Image" />
                     <p>
                         Jane Doe - Web Developer
-                        <small>Member since Nov. 2012</small>
+                        <small>Member since Jul. 2017</small>
                     </p>
                 </li>
-                <!-- Menu Body -->
-                <li class="user-body">
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Friends</a>
-                    </div>
-                </li>
-                <!-- Menu Footer-->
                 <li class="user-footer">
                     <div class="pull-left">
                         <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -92,27 +83,30 @@ SystemAsset::register($this);
                         <img src="/system/image/avatar3.png" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
-                        <p>Hello, Jane</p>
+                        <p>您好, Jane Doe</p>
 
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                     </div>
                 </div>
-                <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn">
-                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
+
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="active">
-                        <a href="index.html">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <a href="/admin">
+                            <i class="fa fa-dashboard"></i> <span>仪表板</span>
+                            <small class="badge pull-right bg-yellow">仪表板</small>
                         </a>
+                    </li>
+
+                    <li class="treeview <?= in_array($controller, ['manager']) ? 'active' : '' ?>">
+                        <a href="#">
+                            <i class="fa fa-group"></i> <span>管理员管理</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li <?= $controller=='manager' ? 'class="active"' : '' ?>>
+                                <a href="<?= \yii\helpers\Url::to(['/admin/manager'])?>">
+                                    <i class="fa fa-angle-double-right"></i> 管理员</a></li>
+                        </ul>
                     </li>
 
 
@@ -132,53 +126,6 @@ SystemAsset::register($this);
                         <a href="pages/widgets.html">
                             <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
                         </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-bar-chart-o"></i>
-                            <span>Charts</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
-                            <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
-                            <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>UI Elements</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> General</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                            <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                            <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                            <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i> <span>Forms</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                            <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                            <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-table"></i> <span>Tables</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                        </ul>
                     </li>
                     <li>
                         <a href="pages/calendar.html">
@@ -216,14 +163,10 @@ SystemAsset::register($this);
         <aside class="right-side">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>
-                    Blank page
-                    <small>Control panel</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Blank page</li>
-                </ol>
+                <?= \yii\widgets\Breadcrumbs::widget([
+                    'homeLink'=>['label' => ' 仪表板','url' => '/admin', 'target'=>'_top', 'class' => 'fa fa-dashboard'],
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
             </section>
 
             <!-- Main content -->

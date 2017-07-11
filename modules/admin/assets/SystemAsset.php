@@ -26,6 +26,7 @@ class SystemAsset extends AssetBundle{
     public $js = [
         'system/js/bootstrap.min.js',
         'system/js/app.js',
+        'plugins/layer/layer.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
