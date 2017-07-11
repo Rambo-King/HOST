@@ -27,6 +27,10 @@ class ComposerStaticInite7bbc9e18f4d13c4675486b0c8f56260
         array (
             'cebe\\markdown\\' => 14,
         ),
+        'd' =>
+            array (
+                'dosamigos\\ckeditor\\' => 19,
+            ),
         'F' => 
         array (
             'Faker\\' => 6,
@@ -66,6 +70,10 @@ class ComposerStaticInite7bbc9e18f4d13c4675486b0c8f56260
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'dosamigos\\ckeditor\\' =>
+            array (
+                0 => __DIR__ . '/..' . '/2amigos/yii2-ckeditor-widget/src',
+            ),
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',

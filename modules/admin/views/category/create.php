@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'enctype' => 'multipart/form-data',
             ],
             'fieldConfig' => [
-                'template' => '{label}<div class="col-xs-4">{input}</div><div class="col-xs-5">{error}</div>',
-                'labelOptions' => ['class' => 'col-xs-2 control-label'],
+                'template' => '{label}<div class="col-xs-7">{input}</div><div class="col-xs-3">{error}</div>',
+                'labelOptions' => ['class' => 'col-xs-1 control-label'],
             ],
         ]); ?>
 
@@ -35,16 +35,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'cover')->textInput(['maxlength' => true, 'ckfinder' => 'modal', 'readonly' => true]) ?>
 
-        <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+        <?= $form->field($model, 'description')->widget(\dosamigos\ckeditor\CKEditor::className(), [
+            'preset' => 'standard', //standard basic full
+            'clientOptions' => [
+                'filebrowserBrowseUrl' => \yii\helpers\Url::to(['@web/plugins/ckfinder/ckfinder.html']),
+                'filebrowserImageBrowseUrl' => \yii\helpers\Url::to('@web/plugins/ckfinder/ckfinder.html'),
+            ],
+        ]) ?>
 
         <?= $form->field($model, 'test_ip')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>
+        <?= $form->field($model, 'note')->widget(\dosamigos\ckeditor\CKEditor::className(), [
+            'preset' => 'standard', //standard basic full
+            'clientOptions' => [
+                'filebrowserBrowseUrl' => \yii\helpers\Url::to(['@web/plugins/ckfinder/ckfinder.html']),
+                'filebrowserImageBrowseUrl' => \yii\helpers\Url::to('@web/plugins/ckfinder/ckfinder.html'),
+            ],
+        ]) ?>
 
         <?= $form->field($model, 'level')->textInput() ?>
 
         <div class="form-group">
-            <div class="col-xs-2 col-xs-offset-2">
+            <div class="col-xs-1 col-xs-offset-1">
             <?= Html::submitButton('创建', ['class' => 'btn btn-success']) ?>
             </div>
         </div>
