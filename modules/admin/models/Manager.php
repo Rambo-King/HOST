@@ -4,6 +4,7 @@ namespace app\modules\admin\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "{{%manager}}".
@@ -17,14 +18,68 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Manager extends ActiveRecord
+class Manager extends ActiveRecord implements IdentityInterface
 {
+    /*
+     * 根据 token 查询身份。
+     * @param string $token 被查询的 token
+     * @return IdentityInterface|null 通过 token 得到的身份对象
+     */
+    public static function findIdentityByAccessToken($token, $type = null){
+        return static::findOne(['access_token' => $token]);
+    }
+
+    /*
+    * 根据给到的ID查询身份
+    * @param string|integer $id 被查询的ID
+    * @return IdentityInterface|null 通过ID匹配到的身份对象
+    */
+    public static function findIdentity($id){
+        return static::findOne($id);
+    }
+
+    /* @return int|string 当前用户ID
+     */
+    public function getId(){
+        return $this->manager_id;
+    }
+
+    /* @return string 当前用户的（cookie）认证密钥
+     */
+    public function getAuthKey(){
+        return $this->auth_key;
+    }
+
+    /*
+     * @param string $authKey
+     * @return boolean if auth key is valid for current user
+     */
+    public function validateAuthKey($authKey){
+        return $this->auth_key === $authKey;
+    }
+
     public function setPassword($password) {
         $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
+    public function validatePassword($password){
+        return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
     public function generateAuthKey() {
         $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /*
+    * 根据 用户名 查询身份。
+    * @return IdentityInterface
+    */
+    public static function findByUsername($username){
+        $manager = Manager::find()->where(['username' => $username])->asArray()->one();
+        if ($manager) {
+            return new static($manager);
+        }
+        return null;
     }
 
     public $password2;

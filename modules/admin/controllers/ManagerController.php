@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\ManagerLoginForm;
 use Yii;
 use app\modules\admin\models\Manager;
 use app\modules\admin\models\ManagerSearch;
@@ -22,6 +23,22 @@ class ManagerController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'user' => 'admin',
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'ajax-delete', 'password', 'logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['login', 'captcha'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -163,5 +180,42 @@ class ManagerController extends Controller
         $model->delete();
         Yii::$app->session->setFlash('success', '删除成功!');
         exit(true);
+    }
+
+    public function actions(){
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'width' => 130,
+                'height' => 50,
+                'backColor' => 0xafdfe4,
+                'foreColor' => 0x000000,
+                'minLength' => 4,
+                'maxLength' => 4,
+                'offset' => 8,
+            ],
+        ];
+    }
+
+    public function actionLogin(){
+        /*if(!Yii::$app->admin->isGuest){
+            return $this->redirect('/admin');
+        }*/
+        $this->layout = 'login';
+        $model = new ManagerLoginForm();
+
+        if($model->load(Yii::$app->request->post()) && $model->login()){
+            return $this->redirect('/admin');
+        }else{
+            return $this->render('login', ['model' => $model]);
+        }
+    }
+
+    public function actionLogout(){
+        Yii::$app->admin->logout(false);
+        return $this->redirect('/admin/manager/login');
     }
 }

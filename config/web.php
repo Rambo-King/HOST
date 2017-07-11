@@ -5,7 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'timeZone'=>'Asia/Chongqing',
     'language' =>'zh-CN',
-    'id' => 'wlHome',
+    'id' => 'kingHost',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
@@ -20,7 +20,6 @@ $config = [
             ],
         ],
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'King',
             //'enableCsrfValidation' => false,
         ],
