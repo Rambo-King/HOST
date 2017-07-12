@@ -4,9 +4,6 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -24,53 +21,34 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
+<div id="navigation" class="navigation">
+    <div id="navi-left" class="navi-left">
+        <ul>
+            <li id="logo"><a href="<?= \Yii::$app->request->hostInfo ?>" target="_self"><img src="/images/logo.png" width="250" height="55" alt="后路哥-主机服务" longdesc="http://houluge.com/" /></a></li>
+            <li><a href="/" title="首页" target="_self">首页</a></li>
+            <li><a href="/host/cate/1" title="台湾云主机" target="_self">台湾云主机</a></li>
+            <li><a href="/host/cate/2" title="美国云主机" target="_self">美国云主机</a></li>
+            <li><a href="/host/cate/3" title="独立服务器" target="_self">独立服务器</a></li>
+            <li><a href="http://speedtest.houluge.com/" title="测速" target="_blank">测速</a></li>
+        </ul>
+    </div>
+    <div id="navi-right" class="navi-right">
+        <ul>
+            <li><a href="tel:18631982331">电话：18631982331</a> - QQ：397341123</li>
+        </ul>
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+<?= $content ?>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+<div id="bottom" class="bottom">Copyright &copy; 2012-2017 Houluge Network Limited. All Rights Reserved.<br>
+    <a href="/home/about/" title="关于后路哥" target="_self">关于我们</a> /
+    <a href="/home/service" target="_self">服务条款</a> /
+    <a href="/home/pay/" target="_self">支付方式</a> /
+    <a href="/home/contact/" target="_self">联系我们</a> /
+    <a href="javascript:;" target="_blank">博客</a> /
+    <a href="javascript:;" target="_blank">促销及公告</a><br>
+</div>
 
 <?php $this->endBody() ?>
 </body>

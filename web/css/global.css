@@ -1,0 +1,74 @@
+@charset "utf-8";
+/* CSS Document */
+
+body { margin:0; padding:0; font-family:'Microsoft Yahei', Tahoma, Geneva, sans-serif; color:#333; background-color:#f8f7f7; }
+a:link {
+	color: #aaa; text-decoration: none;
+}
+a:visited {
+	color: #aaa; text-decoration: none;
+}
+a:hover {
+	color: #ffae00; text-decoration: none;
+}
+a:active {
+	color: #aaa; text-decoration: none;
+}
+
+td{border:solid #cccccc; border-width:0px 1px 1px 0px;}
+table{border:solid #cccccc; border-width:1px 0px 0px 1px;}
+
+.navigation { z-index:1; width:100%; height:auto; float:left; position:fixed; border-bottom:3px solid #ff6633; }
+.navi-left { width:70%; float:left; background-color:#000; }
+.navi-left ul { list-style:none; padding:0; margin:0; }
+#logo { margin:0; padding:0; }
+.navi-left ul li { float:left; padding:15px 15px 0 15px; color:#ccc; font-size:14px; height:40px; }
+.navi-right { width:30%; float:left; background-color:#000; }
+.navi-right ul { list-style:none; padding:0; margin:0; width:100%; }
+.navi-right ul li { float:left; padding:15px 15px 0 15px; color:#ccc; font-size:14px; height:40px; width:90%; text-align:right; }
+
+.main,.main-second,.main-third,.main-fourth,.main-linode,.main-germany,.main-taiwan,.main-korea,.main-japan,.main-usa,.main-hongkong,.main-about,.main-tos, .main-canada, .main-china { width:100%; height:100%; float:left; text-align:center; color:#FFF; font-size:24px; border-bottom:2px solid #999; margin:55px auto; padding:4% 0; }
+.main {  background:url(https://ws2.sinaimg.cn/large/704169ebjw1facdpvq7v0j21kw11xagl.jpg) center repeat;  padding:19% 0; }
+
+
+.url { color:#ffae00; font-size:18px; }
+.welcome, .order, .url { padding:10px 0 10px 0; }
+.bottom { width:100%; padding:20px 0; float:left; background-color:#000; font-size:14px; color:#666; text-align:center; line-height:35px; }
+.description { line-height:45px; color:#FFF; font-size:24px; padding:20px 0; background: rgba(0, 0, 0, 0.5); }
+.list-main { width:100%; height:auto; float:left; background-color:#f8f7f7; margin-top:50px; padding:50px 0; text-align:center; }
+.list-table { margin:0 auto; text-align:center; }
+.notes { width:100%; height:auto; float:left; text-align:center; font-size:14px; padding:15px 0; line-height:35px; }
+.notes2 { width:100%; height:auto; float:left; font-size:23px; background-color:#F90; text-align:center; padding:20px 0; color:#FFF; }
+.red { color:#FF0000; font-weight:bold; }
+
+.de-dsc { width:100%; height:auto; float:left; text-align:center; font-size:24px; color:#d30830; margin-top:50px; padding-bottom:50px; }
+.server-list { width:100%; height:auto; float:left; text-align:center; font-size:24px; color:#d30830; margin-top:50px; background-color:#EEE; padding:15px 0; }
+.test-ip { width:100%; height:auto; float:left; text-align:center; font-size:16px; color:#000000; background-color:#EEE; padding:15px 0; font-weight:bold; }
+.icon,.datacenter {clear: both; width:1000px; height:auto; margin:0 auto; }
+.icon1,.icon2,.icon3,.icon4 { width:25%; height:auto; float:left; margin-top:80px; }
+.icon1 ul,.icon2 ul,.icon3 ul,.icon4 ul { float:left; }
+.icon1 ul li,.icon2 ul li,.icon3 ul li,.icon4 ul li { list-style:none; text-align:center; font-size:19px; }
+
+.datacenter ul { padding:0; margin:0; }
+.datacenter ul li { width:11%; float:left; list-style:none; text-align:center; font-size:18px; border:1px solid #CCC; color:#666; margin:0 5px; padding:15px 0;  }
+
+.k-cover img{
+    width: 100%;
+    height: 300px;
+}
+.k-cover{
+    float: left;
+    margin: 57px auto;
+    width: 100%;
+    z-index: 2;
+}
+.k-desc{
+    position: absolute;
+    line-height:45px; color:#FFF; font-size:24px; padding:20px 0; background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    text-align: center;
+    top:145px;
+}
+p{margin: 0; padding: 0;}
+li.current{ background-color:#333; }
+

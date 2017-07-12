@@ -75,13 +75,14 @@ class Category extends ActiveRecord
         ];
     }
 
-    public static function Tree($array, $pid = 0){
+    public static function Tree($array, $pid = 0, $flag = 'category'){
         static $tree = [];
+        if($flag == 'category') $tree[0] = '顶级分类';
         foreach($array as $val){
             if($val['parent_id'] == $pid){
                 //$tree[] = $val;
                 $tree[$val['category_id']] = str_repeat('--  ', $val['level']). $val['name'];
-                self::Tree($array, $val['category_id']);
+                self::Tree($array, $val['category_id'], $flag);
             }
         }
         return $tree;
@@ -89,20 +90,18 @@ class Category extends ActiveRecord
 
     public static function Category(){
         $rows = self::find()->asArray()->all();
-        $array = self::Tree($rows);
-        array_unshift($array, '顶级分类');
-        return $array;
+        return self::Tree($rows);
     }
 
     public static function Product(){
         $rows = self::find()->asArray()->all();
-        return self::Tree($rows);
+        return self::Tree($rows, 0, 'product');
     }
 
     public static function GetLevel($id){
-        if($id == 0) return 1;
+        if($id == 0) return 0;
         $row = self::find()->where(['category_id' => $id])->one();
-        return $row->level;
+        return $row->level + 1;
     }
 
     public static function HasChildren($id){
@@ -114,4 +113,18 @@ class Category extends ActiveRecord
         $model = self::findOne($id);
         return $model ? $model->name : null;
     }
+
+    /* $id 二级分类id */
+    public static function CategoryProduct($id){
+        $rows = self::find()->where(['parent_id' => $id])->all();
+        $array = [];
+        foreach($rows as $k=>$r){
+            $array[$k]['name'] = $r->name;
+            $array[$k]['ip'] = $r->test_ip;
+            $array[$k]['note'] = $r->note;
+            $array[$k]['product'] = Product::find()->where(['category_id' => $r->category_id])->asArray()->all();
+        }
+        return $array;
+    }
+
 }
