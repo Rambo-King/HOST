@@ -7,6 +7,8 @@ use yii\helpers\Html;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+
+$categories = \app\models\Category::TopCategory();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -26,10 +28,10 @@ AppAsset::register($this);
         <ul>
             <li id="logo"><a href="<?= \Yii::$app->request->hostInfo ?>" target="_self"><img src="/images/logo.png" width="250" height="55" alt="后路哥-主机服务" longdesc="http://houluge.com/" /></a></li>
             <li><a href="/" title="首页" target="_self">首页</a></li>
-            <li><a href="/host/cate/1" title="台湾云主机" target="_self">台湾云主机</a></li>
-            <li><a href="/host/cate/2" title="美国云主机" target="_self">美国云主机</a></li>
-            <li><a href="/host/cate/3" title="独立服务器" target="_self">独立服务器</a></li>
-            <li><a href="http://speedtest.houluge.com/" title="测速" target="_blank">测速</a></li>
+            <?php foreach($categories as $v): ?>
+                <li><a href="/host/cate/<?= $v['category_id'] ?>" title="台湾云主机" target="_self"><?= $v['name'] ?></a></li>
+            <?php endforeach; ?>
+            <!--<li><a href="http://speedtest.houluge.com/" title="测速" target="_blank">测速</a></li>-->
         </ul>
     </div>
     <div id="navi-right" class="navi-right">

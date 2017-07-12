@@ -143,6 +143,13 @@ $action = Yii::$app->controller->action->id;
                         </ul>
                     </li>
 
+                    <li class="active">
+                        <a href="/admin/page">
+                            <i class="fa fa-th"></i> <span>简单页</span>
+                            <small class="badge pull-right bg-red">Page</small>
+                        </a>
+                    </li>
+
                 </ul>
             </section>
             <!-- /.sidebar -->

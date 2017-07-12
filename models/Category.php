@@ -127,4 +127,8 @@ class Category extends ActiveRecord
         return $array;
     }
 
+    public static function TopCategory(){
+        return self::find()->where(['parent_id' => 0])->all();
+    }
+
 }
