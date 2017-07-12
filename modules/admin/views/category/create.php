@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="category-form">
 
         <?php $form = ActiveForm::begin([
-            'enableAjaxValidation' => true,
+            'enableAjaxValidation' => false,
             'options' => [
                 'class'=>'form-horizontal',
                 'enctype' => 'multipart/form-data',
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]); ?>
 
-        <?= $form->field($model, 'parent_id')->textInput() ?>
+        <?= $form->field($model, 'parent_id')->dropDownList(\app\models\Category::Category()) ?>
 
         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-        <?= $form->field($model, 'level')->textInput() ?>
+        <?= $form->field($model, 'summary')->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
             <div class="col-xs-1 col-xs-offset-1">

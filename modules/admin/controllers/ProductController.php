@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\models\Category;
-use app\models\CategorySearch;
+use app\models\Product;
+use app\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CategoryController implements the CRUD actions for Category model.
+ * ProductController implements the CRUD actions for Product model.
  */
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     /**
      * @inheritdoc
@@ -41,12 +41,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Category models.
+     * Lists all Product models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CategorySearch();
+        $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -56,7 +56,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Displays a single Category model.
+     * Displays a single Product model.
      * @param integer $id
      * @return mixed
      */
@@ -68,21 +68,20 @@ class CategoryController extends Controller
     }
 
     /**
-     * Creates a new Category model.
+     * Creates a new Product model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate(){
+    public function actionCreate()
+    {
+        $model = new Product();
 
-        $model = new Category();
-
-        if ($model->load(Yii::$app->request->post())) {
-            $model->level = Category::GetLevel($model->parent_id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if($model->save()){
                 Yii::$app->session->setFlash('success', '创建成功!');
                 return $this->redirect(['index']);
             }else{
-                print_r($model->getErrors()); exit();
+                print_r($model->getErrors()); exit;
             }
         } else {
             return $this->render('create', [
@@ -92,7 +91,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Updates an existing Category model.
+     * Updates an existing Product model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -116,7 +115,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes an existing Category model.
+     * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -129,15 +128,15 @@ class CategoryController extends Controller
     }
 
     /**
-     * Finds the Category model based on its primary key value.
+     * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Category the loaded model
+     * @return Product the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = Product::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -146,15 +145,10 @@ class CategoryController extends Controller
 
     public function actionAjaxDelete(){
         $id = Yii::$app->request->post('id');
-        $flag = Category::HasChildren($id);
-        if($flag){
-            exit(json_encode(['status' => false, 'msg' => '存在子分类, 不可删除']));
-        }else{
-            $model = $this->findModel($id);
-            $model->delete();
-            Yii::$app->session->setFlash('success', '删除成功!');
-            exit(json_encode(['status' => true]));
-        }
+        $model = $this->findModel($id);
+        $model->delete();
+        Yii::$app->session->setFlash('success', '删除成功!');
+        exit(true);
     }
 
 }

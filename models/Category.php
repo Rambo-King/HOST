@@ -15,6 +15,7 @@ use yii\db\ActiveRecord;
  * @property string $description
  * @property string $test_ip
  * @property string $note
+ * @property string $summary
  * @property integer $level
  * @property integer $created_at
  * @property integer $updated_at
@@ -46,11 +47,11 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'name', 'level', 'created_at', 'updated_at'], 'required'],
+            [['parent_id', 'name'], 'required'],
             [['parent_id', 'level', 'created_at', 'updated_at'], 'integer'],
             [['description', 'note'], 'string'],
             [['name'], 'string', 'max' => 32],
-            [['cover', 'test_ip'], 'string', 'max' => 128],
+            [['cover', 'test_ip', 'summary'], 'string', 'max' => 128],
         ];
     }
 
@@ -68,8 +69,49 @@ class Category extends ActiveRecord
             'test_ip' => '测试IP',
             'note' => '备注',
             'level' => '等级',
+            'summary' => '总结',
             'created_at' => '创建于',
             'updated_at' => '更新于',
         ];
+    }
+
+    public static function Tree($array, $pid = 0){
+        static $tree = [];
+        foreach($array as $val){
+            if($val['parent_id'] == $pid){
+                //$tree[] = $val;
+                $tree[$val['category_id']] = str_repeat('--  ', $val['level']). $val['name'];
+                self::Tree($array, $val['category_id']);
+            }
+        }
+        return $tree;
+    }
+
+    public static function Category(){
+        $rows = self::find()->asArray()->all();
+        $array = self::Tree($rows);
+        array_unshift($array, '顶级分类');
+        return $array;
+    }
+
+    public static function Product(){
+        $rows = self::find()->asArray()->all();
+        return self::Tree($rows);
+    }
+
+    public static function GetLevel($id){
+        if($id == 0) return 1;
+        $row = self::find()->where(['category_id' => $id])->one();
+        return $row->level;
+    }
+
+    public static function HasChildren($id){
+        $rows = self::find()->where(['parent_id' => $id])->all();
+        return $rows ? true : false;
+    }
+
+    public static function GetCategoryName($id){
+        $model = self::findOne($id);
+        return $model ? $model->name : null;
     }
 }

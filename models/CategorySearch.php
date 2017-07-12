@@ -19,7 +19,7 @@ class CategorySearch extends Category
     {
         return [
             [['category_id', 'parent_id', 'level', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'cover', 'description', 'test_ip', 'note'], 'safe'],
+            [['name', 'cover', 'description', 'test_ip', 'note', 'summary'], 'safe'],
         ];
     }
 
@@ -70,7 +70,8 @@ class CategorySearch extends Category
             ->andFilterWhere(['like', 'cover', $this->cover])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'test_ip', $this->test_ip])
-            ->andFilterWhere(['like', 'note', $this->note]);
+            ->andFilterWhere(['like', 'note', $this->note])
+            ->andFilterWhere(['like', 'summary', $this->summary]);
 
         return $dataProvider;
     }

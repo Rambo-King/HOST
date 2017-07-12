@@ -104,7 +104,7 @@ $action = Yii::$app->controller->action->id;
                         </a>
                     </li>
 
-                    <li class="active">
+                    <!--<li class="active">
                         <a href="/admin/category">
                             <i class="fa fa-dashboard"></i> <span>主机分类</span>
                             <small class="badge pull-right bg-red">Category</small>
@@ -116,6 +116,20 @@ $action = Yii::$app->controller->action->id;
                             <i class="fa fa-dashboard"></i> <span>主机产品</span>
                             <small class="badge pull-right bg-green">Product</small>
                         </a>
+                    </li>-->
+
+                    <li class="treeview <?= in_array($controller, ['category', 'product']) ? 'active' : '' ?>">
+                        <a href="#">
+                            <i class="fa fa-book"></i> <span>主机服务器</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li <?= $controller=='category' ? 'class="active"' : '' ?>>
+                                <a href="<?= \yii\helpers\Url::to(['/admin/category'])?>">
+                                    <i class="fa fa-angle-double-right"></i> 分类</a></li>
+                            <li <?= $controller=='product' ? 'class="active"' : '' ?>>
+                                <a href="<?= \yii\helpers\Url::to(['/admin/product'])?>">
+                                    <i class="fa fa-angle-double-right"></i> 产品</a></li>
+                        </ul>
                     </li>
 
                     <li class="treeview <?= in_array($controller, ['manager']) ? 'active' : '' ?>">
@@ -129,17 +143,6 @@ $action = Yii::$app->controller->action->id;
                         </ul>
                     </li>
 
-
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-cogs"></i> <span>系统管理</span> <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="<?= \yii\helpers\Url::to(['/admin/manager/index'])?>"><i class="fa fa-angle-double-right"></i> 账户管理</a></li>
-                            <li><a href="<?= \yii\helpers\Url::to(['/admin/manager/index'])?>"><i class="fa fa-angle-double-right"></i> 系统设置</a></li>
-                            <li><a href="<?= \yii\helpers\Url::to(['/admin/manager/index'])?>"><i class="fa fa-angle-double-right"></i> 权限管理</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->
