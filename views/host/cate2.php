@@ -16,7 +16,7 @@
     </ul>
 </div>
 
-<div id="icon" class="icon">
+<div id="icon" class="k-icon">
     <div id="icon1" class="icon1"><ul><li><img src="/images/icon-global.gif" width="149" height="149"></li><li>节点分布广</li><li></li></ul></div>
     <div id="icon2" class="icon2"><ul><li><img src="/images/icon-safe.gif" width="149" height="149"></li><li>硬件配置高</li><li></li></ul></div>
     <div id="icon3" class="icon3"><ul><li><img src="/images/icon-server.gif" width="149" height="149"></li><li>按需设定方案</li><li></li></ul></div>

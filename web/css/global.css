@@ -27,7 +27,10 @@ table{border:solid #cccccc; border-width:1px 0px 0px 1px;}
 .navi-right ul { list-style:none; padding:0; margin:0; width:100%; }
 .navi-right ul li { float:left; padding:15px 15px 0 15px; color:#ccc; font-size:14px; height:40px; width:90%; text-align:right; }
 
-.main,.main-second,.main-third,.main-fourth,.main-linode,.main-germany,.main-taiwan,.main-korea,.main-japan,.main-usa,.main-hongkong,.main-about,.main-tos, .main-canada, .main-china { width:100%; height:100%; float:left; text-align:center; color:#FFF; font-size:24px; border-bottom:2px solid #999; margin:55px auto; padding:4% 0; }
+.main,.main-second,.main-third,.main-fourth,.main-linode,.main-germany,.main-taiwan,.main-korea,.main-japan,.main-usa,.main-hongkong,.main-about,.main-tos, .main-canada, .main-china { width:100%; height:100%; float:left; text-align:center; color:#FFF; font-size:24px; border-bottom:2px solid #999;
+    /*margin:55px auto; */
+    padding:4% 0;
+}
 .main {  background:url(https://ws2.sinaimg.cn/large/704169ebjw1facdpvq7v0j21kw11xagl.jpg) center repeat;  padding:19% 0; }
 
 
@@ -44,7 +47,7 @@ table{border:solid #cccccc; border-width:1px 0px 0px 1px;}
 .de-dsc { width:100%; height:auto; float:left; text-align:center; font-size:24px; color:#d30830; margin-top:50px; padding-bottom:50px; }
 .server-list { width:100%; height:auto; float:left; text-align:center; font-size:24px; color:#d30830; margin-top:50px; background-color:#EEE; padding:15px 0; }
 .test-ip { width:100%; height:auto; float:left; text-align:center; font-size:16px; color:#000000; background-color:#EEE; padding:15px 0; font-weight:bold; }
-.icon,.datacenter {clear: both; width:1000px; height:auto; margin:0 auto; }
+.k-icon,.datacenter {clear: both; width:1000px; height:auto; margin:0 auto; }
 .icon1,.icon2,.icon3,.icon4 { width:25%; height:auto; float:left; margin-top:80px; }
 .icon1 ul,.icon2 ul,.icon3 ul,.icon4 ul { float:left; }
 .icon1 ul li,.icon2 ul li,.icon3 ul li,.icon4 ul li { list-style:none; text-align:center; font-size:19px; }
@@ -58,7 +61,7 @@ table{border:solid #cccccc; border-width:1px 0px 0px 1px;}
 }
 .k-cover{
     float: left;
-    margin: 57px auto;
+    /*margin: 57px auto;*/
     width: 100%;
     z-index: 2;
 }

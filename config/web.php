@@ -8,6 +8,7 @@ $config = [
     'id' => 'kingHost',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => 'other',
     'components' => [
         'urlManager' => [
             'enablePrettyUrl' => true,  //Disable ?r=
